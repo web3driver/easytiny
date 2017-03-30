@@ -6,10 +6,7 @@ A simple CLI for compressing jpg/png images by [tinypng]() api.
 Prerequisites: [Node.js](https://nodejs.org/en/) (>=7.x preferred), npm version 3+ and [Git](https://git-scm.com/).
 
 ``` bash
-$ git clone https://github.com/yvshuo/easytiny.git
-$ cd easytiny
-$ npm install
-$ npm link
+$ npm install -g easytiny
 ```
 
 ### Config
