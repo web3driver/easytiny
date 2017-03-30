@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+require('commander')
+  .version(require('../package').version)
+  .usage('<command> [options]')
+  .command('start', 'start compressing jpg/png images, config your TinyPng key first')
+  .command('config', 'setting easytiny parameters, use \'easytiny config -h\' to get config help')
+  .parse(process.argv)

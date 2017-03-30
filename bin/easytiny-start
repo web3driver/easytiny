@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+const process = require('process');
+const program = require('commander');
+const util = require('../util');
+const start = require('../start');
+
+program
+    .usage(' ')
+    .description('start compressing')
+
+program.on('--help', function () {
+    console.log('  Examples:')
+    console.log()
+    console.log(util.chalk.gray('    # start compressing jpg/png images'))
+    console.log('    $ easytiny start')
+    console.log()
+});
+
+program.parse(process.argv);
+
+start.run();

@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+var process = require('process');
+var program = require('commander');
+var config = require('../config');
+var util = require('../util');
+
+program
+    .command('set <param> <value>')
+    .description('setting easytiny parameters')
+    .action(config.setParam);
+
+program
+    .command('list')
+    .alias('ls')
+    .description('list config parameters')
+    .action(config.listParam);
+
+/**
+ * Help.
+ */
+program.on('--help', function () {
+    console.log('  Examples:')
+    console.log()
+    console.log(util.chalk.gray('    # config TinyPng key'))
+    console.log('    $ easytiny config set api XXXX--XXXXX-XXXXXXXXXXXXXXXXXXXX')
+    console.log()
+    console.log(util.chalk.gray('    # config http proxy'))
+    console.log('    $ easytiny config set proxy http://127.0.0.1:8080')
+    console.log()
+    console.log(util.chalk.gray('    # list config'))
+    console.log('    $ easytiny config list')
+    console.log('    $ easytiny config ls')
+    console.log()
+})
+
+function help() {
+    program.parse(process.argv)
+    if (program.args.length < 1) return program.help()
+}
+help()
