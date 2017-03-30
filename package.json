@@ -1,6 +1,6 @@
 {
   "name": "easytiny",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "a simple image compressing tool with tinypng",
   "bin": {
     "easytiny": "bin/easytiny"
@@ -11,6 +11,10 @@
     "image",
     "tinypng"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yvshuo/easytiny.git"
+  },
   "author": "yvshuo",
   "license": "MIT",
   "dependencies": {

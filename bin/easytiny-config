@@ -23,7 +23,7 @@ program.on('--help', function () {
     console.log('  Examples:')
     console.log()
     console.log(util.chalk.gray('    # config TinyPng key'))
-    console.log('    $ easytiny config set api XXXX--XXXXX-XXXXXXXXXXXXXXXXXXXX')
+    console.log('    $ easytiny config set key XXXX--XXXXX-XXXXXXXXXXXXXXXXXXXX')
     console.log()
     console.log(util.chalk.gray('    # config http proxy'))
     console.log('    $ easytiny config set proxy http://127.0.0.1:8080')

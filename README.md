@@ -11,7 +11,7 @@ $ npm install -g easytiny
 
 ### Config
 
-Set your tinypig api key. Get your api key by visiting [tinypng](https://tinypng.com/developers), 500 images limit every month, but you can register more api keys.
+Set your tinypng api key. Get your api key by visiting [tinypng](https://tinypng.com/developers), 500 images limited every month, but you can register more api keys.
 ```bash
 $ easytiny config set key XXXX-XXXX-XXXXXXXXXXXX
 ```

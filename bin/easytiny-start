@@ -9,6 +9,10 @@ program
     .usage(' ')
     .description('start compressing')
 
+program
+    .option('-r, --resize', 'resize the images before compress')
+    .option('-o, --overwrite', 'overwrite the origin images')
+
 program.on('--help', function () {
     console.log('  Examples:')
     console.log()
@@ -19,4 +23,4 @@ program.on('--help', function () {
 
 program.parse(process.argv);
 
-start.run();
+start.run(program.resize, program.overwrite);

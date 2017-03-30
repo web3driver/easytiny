@@ -8,13 +8,13 @@
             "type": "node",
             "request": "launch",
             "name": "启动程序",
-            "program": "${workspaceRoot}\\bin\\easytiny",
+            "program": "${workspaceRoot}/bin/easytiny",
             "cwd": "${workspaceRoot}",
             "outFiles": [],
             "args": [
-                "start"
-            ],
-            "console": "integratedTerminal"
+                "start",
+                "-o"
+            ]
         },
         {
             "type": "node",
