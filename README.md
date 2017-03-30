@@ -8,6 +8,7 @@ Prerequisites: [Node.js](https://nodejs.org/en/) (>=7.x preferred), npm version 
 ``` bash
 $ git clone https://github.com/yvshuo/easytiny.git
 $ cd easytiny
+$ npm install
 $ npm link
 ```
 
