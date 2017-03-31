@@ -3,7 +3,9 @@
   "version": "1.0.3",
   "description": "a simple image compressing tool with tinypng",
   "bin": {
-    "easytiny": "bin/easytiny"
+    "easytiny": "bin/easytiny",
+    "easytiny-start": "bin/easytiny-start",
+    "easytiny-config": "bin/easytiny-config"
   },
   "keywords": [
     "node",

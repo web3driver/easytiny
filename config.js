@@ -17,10 +17,9 @@ function readParam() {
     }
 
     try {
-        if(util.is.empty(_config)) {
+        if (util.is.empty(_config)) {
             _parseConfig = {};
-        }
-        else {
+        } else {
             _parseConfig = JSON.parse(_config);
         }
     } catch (error) {
@@ -53,22 +52,23 @@ function listParam() {
 function setParam(param, value) {
     let _params = readParam();
     if (param === 'key' || param === 'proxy') {
-        util.confirm(util.chalk.red(`Are you sure to set ${param} = ${value}?`), function (answers) {
-            if (answers.ok) {
-                _params[`${param}`] = value;
-                fs.writeFile(rcfile, JSON.stringify(_params), {
-                    encoding: 'utf8',
-                    flag: 'w+'
-                }, function (error) {
-                    if (error) throw error;
-                    console.log(util.chalk.green(`\'${param}\' saved successful!`));
+        util.confirm(util.chalk.red(`Are you sure to set ${param} = ${value}?`))
+            .then(function (answers) {
+                if (answers.ok) {
+                    _params[`${param}`] = value;
+                    fs.writeFile(rcfile, JSON.stringify(_params), {
+                        encoding: 'utf8',
+                        flag: 'w+'
+                    }, function (error) {
+                        if (error) throw error;
+                        console.log(util.chalk.green(`\'${param}\' saved successful!`));
+                        process.exit(1);
+                    })
+                } else {
+                    console.log('Operation Canceled!');
                     process.exit(1);
-                })
-            } else {
-                console.log('Operation Canceled!');
-                process.exit(1);
-            }
-        })
+                }
+            })
     } else {
         console.error(util.chalk.bgRed(`no such param`));
     }

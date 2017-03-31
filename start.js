@@ -28,38 +28,77 @@ function getConfig() {
     return true;
 }
 
-function run(resize, overwrite) {
+function run(resize, overwrite, force) {
     if (!getConfig()) process.exit(1);
     let imageList = [];
-    let hasCompress = false;
 
     fs.readdirSync(cwdpath).forEach(function (v) {
-        if (v === 'compress') hasCompress = true;
         let _ext = path.extname(v);
         if (_ext === '.jpg' || _ext === '.png') {
             imageList.push(v)
         }
     });
 
-    if (!overwrite && !hasCompress) fs.mkdir(path.join(cwdpath, 'compress'));
-
     if (resize) {
-        setResizeParam()
-            .then(function (v) {
-                doCompress(imageList, overwrite, v);
-            });
+        confirmMode(resize, overwrite, force)
+            .then(function (answers) {
+                if (answers.ok) {
+                    setResizeParam()
+                        .then(function (v) {
+                            doCompress(imageList, overwrite, v);
+                        });
+                } else {
+                    process.exit(1);
+                }
+            })
+            .catch(function (err) {
+                throw err;
+            })
     } else {
-        doCompress(imageList, overwrite);
+        confirmMode(resize, overwrite, force)
+            .then(function (answers) {
+                if (answers.ok) {
+                    doCompress(imageList, overwrite);
+                } else {
+                    process.exit(1);
+                }
+            })
+            .catch(function (err) {
+                throw err;
+            });
     }
+}
+
+function confirmMode(resize, overwrite, force) {
+    if (force) return Promise.resolve({
+        "ok": true
+    });
+    let msg_resize = resize ? ' resize' : '';
+    let msg_overwrite = overwrite ? ' overwrite' : '';
+    let msg_default = !resize && !overwrite ? ' default' : '';
+    let connector = resize && overwrite ? ' and' : '';
+    let description_resize = resize ? ' Images will be resized.' : '';
+    let description_overwrite = overwrite ? ' Original images will be overwritten directely.' :
+        ' Compressed images will be output into a new \'easytiny\' folder with a timestamp.';
+    let msg = `Easytiny will be running under${msg_default}${msg_resize}${connector}${msg_overwrite} mode.${description_resize}${description_overwrite} Confirm and Continue!`
+    return util.confirm(msg);
 }
 
 function doCompress(imageList, overwrite, resizeObj) {
     let promise = [];
     let _path = '';
+    let _folderName = 'easytiny' + util.getTimeStamp();
+    let _folderMsg = '';
+
+    if (!overwrite && !!imageList.length) {
+        _folderMsg = ` Check your compressed images at \'${path.join(cwdpath, _folderName)}\'.`
+        fs.mkdirSync(path.join(cwdpath, _folderName));
+    }
+
     imageList.forEach(function (v) {
         let _name = v;
         try {
-            let _promise;
+            let _promise, _resize;
             if (!util.is.empty(resizeObj)) {
                 _promise = tinify.fromFile(v).resize(resizeObj);
             } else {
@@ -68,16 +107,16 @@ function doCompress(imageList, overwrite, resizeObj) {
             if (overwrite) {
                 _path = path.join(cwdpath, path.basename(v));
             } else {
-                _path = path.join(cwdpath, 'compress', path.basename(v));
+                _path = path.join(cwdpath, _folderName, path.basename(v));
             }
-            _promise.toFile(_path)
+            _resize = _promise.toFile(_path)
                 .then(function () {
                     console.log(util.chalk.green(`${path.basename(v)} compressed successful!`));
                 })
                 .catch(function (err) {
                     throw err;
                 });
-            promise.push(_promise);
+            promise.push(_resize);
         } catch (error) {
             throw error;
         }
@@ -89,7 +128,8 @@ function doCompress(imageList, overwrite, resizeObj) {
     } else {
         Promise.all(promise).then(function (v) {
             console.log();
-            console.log(util.chalk.bgGreen(`Image compressing tasks all done! You have compressed ${tinify.compressionCount} images this month!`))
+            console.log(util.chalk.bgGreen(`Image compressing tasks all done!${_folderMsg}`));
+            console.log(util.chalk.bgGreen(`You have compressed ${tinify.compressionCount} images this month!`));
         }).catch(function (err) {
             throw err;
         });

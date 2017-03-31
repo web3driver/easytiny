@@ -12,15 +12,25 @@ program
 program
     .option('-r, --resize', 'resize the images before compress')
     .option('-o, --overwrite', 'overwrite the origin images')
+    .option('-f, --force', 'no confirm, do compress immediately')
 
 program.on('--help', function () {
     console.log('  Examples:')
     console.log()
-    console.log(util.chalk.gray('    # start compressing jpg/png images'))
+    console.log(util.chalk.gray('    # start compressing jpg/png images in default mode'))
     console.log('    $ easytiny start')
+    console.log()
+    console.log(util.chalk.gray('    # start compressing jpg/png images with resize images'))
+    console.log('    $ easytiny start -r')
+    console.log()
+    console.log(util.chalk.gray('    # start compressing jpg/png images in overwrite mode'))
+    console.log('    $ easytiny start -o')
+    console.log()
+    console.log(util.chalk.gray('    # start compressing jpg/png images immediately without confirm'))
+    console.log('    $ easytiny start -f')
     console.log()
 });
 
 program.parse(process.argv);
 
-start.run(program.resize, program.overwrite);
+start.run(program.resize, program.overwrite, program.force);

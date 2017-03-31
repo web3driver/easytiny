@@ -6,14 +6,16 @@
     "configurations": [
         {
             "type": "node",
+            "runtimeArgs": [
+                "--trace-deprecation"
+            ],
             "request": "launch",
-            "name": "启动程序",
-            "program": "${workspaceRoot}/bin/easytiny",
-            "cwd": "${workspaceRoot}",
+            "name": "打印错误信息",
+            "program": "${workspaceRoot}/bin/easytiny-start",
+            "cwd": "${workspaceRoot}/../test",
             "outFiles": [],
             "args": [
-                "start",
-                "-o"
+                "-f"
             ]
         },
         {
