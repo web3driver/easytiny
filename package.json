@@ -1,6 +1,6 @@
 {
   "name": "easytiny",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "a simple image compressing tool with tinypng",
   "bin": {
     "easytiny": "bin/easytiny",
