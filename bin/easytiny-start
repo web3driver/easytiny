@@ -2,8 +2,8 @@
 
 const process = require('process');
 const program = require('commander');
-const util = require('../util');
-const start = require('../start');
+const util = require('../src/util');
+const start = require('../src/start');
 
 program
     .usage(' ')

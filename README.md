@@ -1,5 +1,5 @@
 
-`easytiny` is a simple CLI for compressing jpg/png images by [tinypng]() api.
+`easytiny` is a simple CLI for compressing jpg/png images by [tinypng](https://tinypng.com/) api.
 
 ### Installation
 

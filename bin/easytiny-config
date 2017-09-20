@@ -2,8 +2,8 @@
 
 var process = require('process');
 var program = require('commander');
-var config = require('../config');
-var util = require('../util');
+var config = require('../src/config');
+var util = require('../src/util');
 
 program
     .command('set <param> <value>')
@@ -23,6 +23,7 @@ program.on('--help', function () {
     console.log('  Examples:')
     console.log()
     console.log(util.chalk.gray('    # config TinyPng key'))
+    console.log(util.chalk.gray('    # visiting https://tinypng.com/developers to get your own api key'))
     console.log('    $ easytiny config set key XXXX--XXXXX-XXXXXXXXXXXXXXXXXXXX')
     console.log()
     console.log(util.chalk.gray('    # config http proxy'))

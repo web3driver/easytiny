@@ -36,7 +36,7 @@ function listParam() {
     console.log(util.chalk.bgBlue('  Configurations:'))
     if (util.is.empty(_params)) {
         console.log()
-        console.log(util.chalk.red('    no configurations found'))
+        console.log(util.chalk.red(`    no configurations found, use 'easytiny config --help' to see how to set configurations`))
         console.log()
         process.exit(1)
     } else {
