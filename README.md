@@ -1,4 +1,6 @@
 
+[中文文档](http://yvshuo.me/blog/2017/04/01/2017-04-01-easytiny-1/)
+
 `easytiny` is a simple CLI for compressing jpg/png images by [tinypng](https://tinypng.com/) api.
 
 ### Installation
